@@ -9,8 +9,8 @@ module.exports = {
     output: path.resolve(__dirname, '../dist/'),
   },
   server: {
-    host: 'localhost',
-    port: 8000,
+    host: 'local-ipv4',
+    port: 3000
   },
   limits: {
     /* Image files size in bytes. Below this value the image file will be served as DataURL (inline base64). */
