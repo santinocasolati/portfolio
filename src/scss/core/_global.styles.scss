@@ -1,0 +1,13 @@
+body {
+    overflow: hidden;
+    user-select: none;
+    font-family: "Montserrat", sans-serif;
+}
+
+html {
+    font-size: 16px;
+
+    @include respond-to("SML") {
+        font-size: 20px;
+    }
+}
