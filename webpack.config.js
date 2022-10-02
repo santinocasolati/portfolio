@@ -72,6 +72,10 @@ module.exports = {
           filename: 'images/design/[name].[hash:6][ext]',
         },
       },
+      {
+        test: /\.glsl$/,
+        loader: 'webpack-glsl-loader'
+      }
     ],
   },
   optimization: {

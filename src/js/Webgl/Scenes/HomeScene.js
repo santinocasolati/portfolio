@@ -25,7 +25,7 @@ export class HomeScene {
 
         this.particleSetup();
 
-        this.setDebug();
+        // this.setDebug();
 
         this.setupResize();
         this.resize();
