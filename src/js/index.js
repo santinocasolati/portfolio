@@ -18,6 +18,17 @@ gsap.registerPlugin(SplitText);
 
 export default class Site {
   constructor(options) {
+    window.addEventListener("load", () => {
+      const tl = gsap.timeline();
+      tl.to('.loader', { opacity: 0, display: 'none', duration: 0.8 }, 0);
+      tl.to('#webgl-container', { opacity: 1, duration: 0.8 }, 1.4);
+      tl.to('.intro-title', { opacity: 1, duration: 0.6 }, 1.7);
+      tl.to('.intro-subtitle', { opacity: 1, duration: 0.6 }, 2);
+      tl.to('.intro-btn', { opacity: 1, duration: 0.6 }, 2.3);
+      tl.to('.sc-text', { opacity: 1, duration: 0.6 }, 2.6);
+      tl.to('.menu-btn', { opacity: 1, duration: 0.6 }, 2.9);
+    });
+
     new BowserSetUp();
     // this.initLocomotive();
     this.setReact();
@@ -71,10 +82,6 @@ export default class Site {
 
   setReact() {
     new ReactSetup();
-
-    // setTimeout(() => {
-    //   window.refreshPositions();
-    // }, 500);
   }
 
   setWebgl() {

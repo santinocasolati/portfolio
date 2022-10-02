@@ -27,6 +27,7 @@ nav {
             font-weight: 500;
             cursor: pointer;
             white-space: nowrap;
+            opacity: 0;
         }
     }
 
@@ -42,6 +43,7 @@ nav {
             width: 2rem;
             position: relative;
             cursor: pointer;
+            opacity: 0;
 
             div {
                 background-color: #fff;

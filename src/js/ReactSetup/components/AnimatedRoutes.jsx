@@ -14,10 +14,10 @@ export function AnimatedRoutes() {
     ];
 
     const onEnter = (page) => {
-        page.children[0].style.display = 'block'
-        const tl = gsap.timeline();
+        page.children[0].style.backgroundColor = 'red'
+        // const tl = gsap.timeline();
 
-        tl.fromTo(page, { opacity: 0 }, { opacity: 1, duration: 0.6 })
+        // tl.fromTo(page, { opacity: 0 }, { opacity: 1, duration: 0.6 })
 
         return tl;
     }
@@ -38,8 +38,8 @@ export function AnimatedRoutes() {
             <CSSTransition
                 key={location.pathname}
                 timeout={600}
-                onEntered={onEnter}
-                onExit={onExit}
+            // onEntered={onEnter}
+            // onExit={onExit}
             >
 
                 <Routes location={location} key={location.pathname}>

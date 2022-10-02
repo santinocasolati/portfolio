@@ -19,6 +19,7 @@
                 font-weight: 400;
                 letter-spacing: 0.3125rem;
                 text-align: center;
+                opacity: 0;
             }
 
             .intro-subtitle {
@@ -28,6 +29,7 @@
                 padding-top: 0.3rem;
                 padding-bottom: 2rem;
                 text-align: center;
+                opacity: 0;
             }
 
             .intro-btn {
@@ -43,6 +45,7 @@
                 width: fit-content;
                 margin-left: 50%;
                 transform: translateX(-50%);
+                opacity: 0;
 
                 @include respond-to("SML") {
                     padding: 1.25rem 1.875rem;
