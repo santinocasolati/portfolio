@@ -1,10 +1,13 @@
-import React from 'react'
+import React from 'react';
+
+import { Intro } from "../components/Intro";
 
 export function Home() {
-    const component =
-        <main className='home'>
-        </main>
-        ;
+    return <>
+        <Intro />
 
-    return component;
+        <main className="home">
+
+        </main>
+    </>;
 }

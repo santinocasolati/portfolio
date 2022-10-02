@@ -49,7 +49,7 @@ export class HomeScene {
         this.scene.add(sceneLight);
 
         this.portalLight = new THREE.PointLight(0x062d89, 30, 350, 1.7);
-        this.portalLight.position.set(0, 0, 250);
+        this.portalLight.position.set(0, 100, 250);
         this.scene.add(this.portalLight);
     }
 
@@ -74,6 +74,7 @@ export class HomeScene {
                     0.3 * i * Math.sin((4 * i * Math.PI) / 180),
                     0.1 * i
                 );
+                particle.position.y += 100;
                 particle.rotation.z = Math.random() * 360;
                 this.portalParticles.push(particle);
                 this.scene.add(particle);
@@ -86,6 +87,7 @@ export class HomeScene {
                     Math.random() * 200 - 100,
                     25
                 );
+                particle.position.y += 100;
                 particle.rotation.z = Math.random() * 360;
                 particle.material.opacity = 0.4;
                 this.smokeParticles.push(particle);

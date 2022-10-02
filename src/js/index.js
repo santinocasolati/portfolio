@@ -19,7 +19,7 @@ gsap.registerPlugin(SplitText);
 export default class Site {
   constructor(options) {
     new BowserSetUp();
-    this.initLocomotive();
+    // this.initLocomotive();
     this.setReact();
     this.setWebgl();
     this.resize();
@@ -72,9 +72,9 @@ export default class Site {
   setReact() {
     new ReactSetup();
 
-    setTimeout(() => {
-      window.refreshPositions();
-    }, 500);
+    // setTimeout(() => {
+    //   window.refreshPositions();
+    // }, 500);
   }
 
   setWebgl() {
