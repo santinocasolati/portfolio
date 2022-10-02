@@ -24,6 +24,10 @@
 
         svg {
             pointer-events: all;
+
+            &:first-of-type {
+                opacity: 0.2;
+            }
         }
     }
 

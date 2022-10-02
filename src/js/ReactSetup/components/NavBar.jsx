@@ -5,10 +5,18 @@ export function NavBar() {
     window.inHome = true;
 
     const goHomeAnim = () => {
-        gsap.to('.home-menu', {
-            opacity: 1, display: 'flex', duration: 0.8, onStart: () => {
-                window.portalSelected = false;
-                window.webgl.home.changeLightColor('#062d89');
+        const target = window.innerWidth > 820 ? '.home-menu' : '.home-menu-mobile';
+        const display = window.innerWidth > 820 ? 'flex' : 'block';
+
+        gsap.to(target, {
+            opacity: 1, display: display, duration: 0.8, ease: 'power2.out', onStart: () => {
+                setTimeout(() => {
+                    window.portalSelected = false;
+
+                    if (window.innerWidth > 820) {
+                        window.webgl.home.changeLightColor('#062d89');
+                    }
+                }, 100);
             }
         })
     }
@@ -22,7 +30,7 @@ export function NavBar() {
     return <>
         <nav>
             <div className="nav-left">
-                <div className="sc-text">SANTINO CASOLATI</div>
+                <div className="sc-text" onClick={goHome}>SANTINO CASOLATI</div>
             </div>
 
             <div className="nav-right">

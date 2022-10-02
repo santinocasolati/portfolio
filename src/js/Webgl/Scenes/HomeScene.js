@@ -1,4 +1,5 @@
 import * as THREE from 'three';
+import { gsap } from 'gsap';
 
 export class HomeScene {
     constructor(textureLoader, gui) {
@@ -16,6 +17,7 @@ export class HomeScene {
 
         this.portalParticles = [];
         this.smokeParticles = [];
+        this.tempColor = { value: "#062d89" };
 
         this.init();
     }
@@ -48,7 +50,7 @@ export class HomeScene {
         sceneLight.position.set(0, 0, 1);
         this.scene.add(sceneLight);
 
-        this.portalLight = new THREE.PointLight(0x062d89, 30, 350, 1.7);
+        this.portalLight = new THREE.PointLight('#062d89', 30, 350, 1.7);
         this.portalLight.position.set(0, 100, 250);
         this.scene.add(this.portalLight);
     }
@@ -97,7 +99,11 @@ export class HomeScene {
     }
 
     changeLightColor(color) {
-        this.portalLight.color = new THREE.Color(color);
+        gsap.to(this.tempColor, {
+            value: color, duration: 0.3, ease: 'power2.out', onUpdate: () => {
+                this.portalLight.color = new THREE.Color(this.tempColor.value);
+            }
+        });
     }
 
     resize() {

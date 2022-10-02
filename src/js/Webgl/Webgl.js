@@ -127,7 +127,7 @@ export default class Webgl {
         this.nextScene = sceneToGo;
 
         gsap.to(this.renderMat.uniforms.progress, {
-            value: 1, duration: 0.8, onComplete: () => {
+            value: 1, duration: 1.6, ease: 'power2.out', onComplete: () => {
                 this.prevScene = sceneToGo;
                 this.renderMat.uniforms.progress.value = 0;
 
