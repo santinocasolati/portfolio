@@ -6,7 +6,15 @@ export function Intro() {
         const tl = gsap.timeline();
 
         tl.to('.introduction', { opacity: 0, duration: 0.8, onComplete: () => gsap.set('.introduction', { display: 'none' }) }, 0);
-        tl.to('.home', { opacity: 1, pointerEvents: 'all', duration: 0.8 }, 0.8);
+        tl.to('.home', {
+            opacity: 1, pointerEvents: 'all', duration: 0.8, onStart: () => {
+                if (window.innerWidth < 820) {
+                    setTimeout(() => {
+                        window.webgl.home.changeLightColor('#890000');
+                    }, 400);
+                }
+            }
+        }, 0.8);
     };
 
     return <>

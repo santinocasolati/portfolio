@@ -9,7 +9,11 @@ nav {
     flex-direction: row;
     align-items: center;
     justify-content: space-between;
-    padding: 0 3rem;
+    padding: 0 1rem;
+
+    @include respond-to("SML") {
+        padding: 0 3rem;
+    }
 
     .nav-left {
         height: 100%;
