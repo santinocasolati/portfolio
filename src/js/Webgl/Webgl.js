@@ -18,7 +18,7 @@ export default class Webgl {
         this.renderer = new THREE.WebGLRenderer({ antialias: false });
         this.renderer.setClearColor(0x000000, 1);
         this.container.appendChild(this.renderer.domElement);
-        this.renderer.setPixelRatio(window.devicePixelRatio * 0.5);
+        this.renderer.setPixelRatio(window.devicePixelRatio);
 
         this.clock = new THREE.Clock();
         this.textureLoader = new THREE.TextureLoader();
