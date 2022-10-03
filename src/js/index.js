@@ -34,6 +34,7 @@ export default class Site {
     this.setReact();
     this.setWebgl();
     this.resize();
+    this.setResize();
   }
 
   initLocomotive() {
@@ -97,6 +98,7 @@ export default class Site {
 
   setResize() {
     window.addEventListener("resize", () => {
+      console.log('resize');
       this.resize();
     });
   }

@@ -71,13 +71,9 @@ export default class Webgl {
     }
 
     setScenes() {
-        this.texturePrev = new THREE.WebGLRenderTarget(this.width, this.height, {
-            format: THREE.RGBAFormat
-        });
+        this.texturePrev = new THREE.WebGLRenderTarget(this.width, this.height);
 
-        this.textureNext = new THREE.WebGLRenderTarget(this.width, this.height, {
-            format: THREE.RGBAFormat
-        })
+        this.textureNext = new THREE.WebGLRenderTarget(this.width, this.height);
 
         this.finalScene = new THREE.Scene();
         this.finalCamera = new THREE.OrthographicCamera(-0.25, 0.25, 0.25, -0.25, 0, 5);
