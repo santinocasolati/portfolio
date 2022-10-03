@@ -15,16 +15,19 @@ export default class Webgl {
         this.width = window.innerWidth;
         this.height = window.innerHeight;
 
-        this.renderer = new THREE.WebGLRenderer();
+        this.renderer = new THREE.WebGLRenderer({ antialias: false });
         this.renderer.setClearColor(0x000000, 1);
         this.container.appendChild(this.renderer.domElement);
+        this.renderer.setPixelRatio(window.devicePixelRatio * 0.5);
 
         this.clock = new THREE.Clock();
         this.textureLoader = new THREE.TextureLoader();
 
         this.gui = new dat.GUI();
         this.gui.hide();
-        this.debug = true;
+        this.debug = false;
+
+        this.pageChanging = false;
 
         this.init();
     }
@@ -69,24 +72,16 @@ export default class Webgl {
 
     setScenes() {
         this.texturePrev = new THREE.WebGLRenderTarget(this.width, this.height, {
-            format: THREE.RGBAFormat,
-            minFilter: THREE.LinearFilter,
-            magFilter: THREE.LinearFilter
+            format: THREE.RGBAFormat
         });
 
         this.textureNext = new THREE.WebGLRenderTarget(this.width, this.height, {
-            format: THREE.RGBAFormat,
-            minFilter: THREE.LinearFilter,
-            magFilter: THREE.LinearFilter
+            format: THREE.RGBAFormat
         })
 
         this.finalScene = new THREE.Scene();
-        this.finalCamera = new THREE.OrthographicCamera(-0.5, 0.5, 0.5, -0.5, -1000, 1000);
+        this.finalCamera = new THREE.OrthographicCamera(-0.25, 0.25, 0.25, -0.25, 0, 5);
         this.renderMat = new THREE.ShaderMaterial({
-            extensions: {
-                derivatives: "#extension GL_OES_standard_derivatives : enable"
-            },
-            side: THREE.DoubleSide,
             uniforms: {
                 progress: { value: 0 },
                 prevScene: { value: null },
@@ -95,7 +90,7 @@ export default class Webgl {
             vertexShader: teleportationVertex,
             fragmentShader: teleportationFragment
         });
-        const renderGeo = new THREE.PlaneGeometry(1, 1);
+        const renderGeo = new THREE.PlaneGeometry(0.5, 0.5);
         const renderMesh = new THREE.Mesh(renderGeo, this.renderMat);
         this.finalScene.add(renderMesh);
 
@@ -127,9 +122,14 @@ export default class Webgl {
         this.nextScene = sceneToGo;
 
         gsap.to(this.renderMat.uniforms.progress, {
-            value: 1, duration: 1.6, ease: 'power2.out', onComplete: () => {
+            value: 1, duration: 1.6, ease: 'power2.out', onStart: () => {
+                this.pageChanging = true;
+            },
+            onComplete: () => {
                 this.prevScene = sceneToGo;
                 this.renderMat.uniforms.progress.value = 0;
+
+                this.pageChanging = false;
 
                 if (enterAnim !== false) {
                     enterAnim();
@@ -153,16 +153,20 @@ export default class Webgl {
 
     render() {
         const delta = this.clock.getDelta();
-        this.home.update(delta);
+    
+        if (this.prevScene === this.home || this.nextScene === this.home) {
+            this.home.update(delta);
+        }
 
         this.renderer.setRenderTarget(this.texturePrev);
         this.renderer.render(this.prevScene.scene, this.prevScene.camera);
-
-        this.renderer.setRenderTarget(this.textureNext);
-        this.renderer.render(this.nextScene.scene, this.nextScene.camera);
-
         this.renderMat.uniforms.prevScene.value = this.texturePrev.texture;
-        this.renderMat.uniforms.nextScene.value = this.textureNext.texture;
+
+        if (this.pageChanging) {
+            this.renderer.setRenderTarget(this.textureNext);
+            this.renderer.render(this.nextScene.scene, this.nextScene.camera);
+            this.renderMat.uniforms.nextScene.value = this.textureNext.texture;
+        }
 
         this.renderer.setRenderTarget(null);
         this.renderer.render(this.finalScene, this.finalCamera);

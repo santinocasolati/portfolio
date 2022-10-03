@@ -11,7 +11,7 @@ export class HomeScene {
         this.width = window.innerWidth;
         this.height = window.outerHeight;
 
-        this.camera = new THREE.PerspectiveCamera(80, this.width / this.height, 1, 10000);
+        this.camera = new THREE.PerspectiveCamera(80, this.width / this.height, 100, 1000);
         this.camera.position.z = 1000;
         this.scene.add(this.camera);
 
@@ -57,14 +57,8 @@ export class HomeScene {
 
     particleSetup() {
         this.textureLoader.load("static/textures/smoke.png", (texture) => {
-            const portalGeo = new THREE.PlaneGeometry(350, 350);
+            const portalGeo = new THREE.PlaneGeometry(1, 1);
             const portalMaterial = new THREE.MeshStandardMaterial({
-                map: texture,
-                transparent: true
-            });
-
-            const smokeGeo = new THREE.PlaneGeometry(1000, 1000);
-            const smokeMaterial = new THREE.MeshStandardMaterial({
                 map: texture,
                 transparent: true
             });
@@ -77,22 +71,9 @@ export class HomeScene {
                     0.1 * i
                 );
                 particle.position.y += 100;
+                particle.scale.set(350, 350);
                 particle.rotation.z = Math.random() * 360;
                 this.portalParticles.push(particle);
-                this.scene.add(particle);
-            }
-
-            for (let i = 0; i < 40; i++) {
-                const particle = new THREE.Mesh(smokeGeo, smokeMaterial);
-                particle.position.set(
-                    Math.random() * 250 - 125,
-                    Math.random() * 200 - 100,
-                    25
-                );
-                particle.position.y += 100;
-                particle.rotation.z = Math.random() * 360;
-                particle.material.opacity = 0.4;
-                this.smokeParticles.push(particle);
                 this.scene.add(particle);
             }
         });
