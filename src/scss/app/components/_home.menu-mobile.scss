@@ -52,30 +52,6 @@
                 opacity: 0.8;
                 text-align: center;
             }
-
-            .enter-btn {
-                color: #fff;
-                font-size: 1rem;
-                letter-spacing: 0.125rem;
-                font-weight: 600;
-                padding: 0.9375rem 1.5625rem;
-                border: 0.0625rem solid;
-                cursor: pointer;
-                background-color: rgba(255, 255, 255, 0);
-                transition: all 0.3s;
-                width: fit-content;
-                margin-left: 50%;
-                transform: translateX(-50%);
-
-                @include respond-to("SML") {
-                    padding: 1.25rem 1.875rem;
-                }
-
-                &:hover {
-                    background-color: rgba(255, 255, 255, 1);
-                    color: #000;
-                }
-            }
         }
     }
 }

@@ -77,7 +77,7 @@ export function MenuMobile() {
                 <div className="menu-mobile-slide">
                     <span>WHO I AM</span>
 
-                    <div className="enter-btn" onClick={() => { goTo('other') }}>
+                    <div className="enter-btn main-btn" onClick={() => { goTo('other') }}>
                         ENTER
                     </div>
                 </div>
@@ -85,7 +85,7 @@ export function MenuMobile() {
                 <div className="menu-mobile-slide">
                     <span>TECHNOLOGIES</span>
 
-                    <div className="enter-btn" onClick={() => { goTo('other') }}>
+                    <div className="enter-btn main-btn" onClick={() => { goTo('other') }}>
                         ENTER
                     </div>
                 </div>
@@ -93,7 +93,7 @@ export function MenuMobile() {
                 <div className="menu-mobile-slide">
                     <span>WORKS</span>
 
-                    <div className="enter-btn" onClick={() => { goTo('other') }}>
+                    <div className="enter-btn main-btn" onClick={() => { goTo('other') }}>
                         ENTER
                     </div>
                 </div>
@@ -101,7 +101,7 @@ export function MenuMobile() {
                 <div className="menu-mobile-slide">
                     <span>PROJECTS</span>
 
-                    <div className="enter-btn" onClick={() => { goTo('other') }}>
+                    <div className="enter-btn main-btn" onClick={() => { goTo('other') }}>
                         ENTER
                     </div>
                 </div>

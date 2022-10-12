@@ -25,7 +25,7 @@ export function Intro() {
                     <div className='intro-title'>MORE THAN A WEBSITE</div>
                     <div className='intro-subtitle'>Using modern technologies, telling a story on the web is now possible</div>
 
-                    <div className="intro-btn" onClick={exploreClick}>
+                    <div className="intro-btn main-btn" onClick={exploreClick}>
                         EXPLORE
                     </div>
                 </div>

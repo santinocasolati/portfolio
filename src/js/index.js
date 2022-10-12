@@ -21,12 +21,12 @@ export default class Site {
     window.addEventListener("load", () => {
       const tl = gsap.timeline();
       tl.to('.loader', { opacity: 0, display: 'none', duration: 0.8 }, 0);
-      tl.to('#webgl-container', { opacity: 1, duration: 0.8 }, 1.4);
-      tl.to('.intro-title', { opacity: 1, duration: 0.6 }, 1.7);
-      tl.to('.intro-subtitle', { opacity: 1, duration: 0.6 }, 2);
-      tl.to('.intro-btn', { opacity: 1, duration: 0.6 }, 2.3);
-      tl.to('.sc-text', { opacity: 1, duration: 0.6 }, 2.6);
-      tl.to('.menu-btn', { opacity: 1, duration: 0.6 }, 2.9);
+      tl.fromTo('#webgl-container', { opacity: 0 }, { opacity: 1, duration: 0.8 }, 1.4);
+      tl.fromTo('.intro-title', { opacity: 0 }, { opacity: 1, duration: 0.6 }, 1.7);
+      tl.fromTo('.intro-subtitle', { opacity: 0 }, { opacity: 1, duration: 0.6 }, 2);
+      tl.fromTo('.intro-btn', { opacity: 0 }, { opacity: 1, duration: 0.6 }, 2.3);
+      tl.fromTo('.sc-text', { opacity: 0 }, { opacity: 1, duration: 0.6 }, 2.6);
+      tl.fromTo('.menu-btn', { opacity: 0 }, { opacity: 1, duration: 0.6 }, 2.9);
     });
 
     new BowserSetUp();
