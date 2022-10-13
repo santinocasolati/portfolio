@@ -19,17 +19,13 @@ export function NavBar() {
             opacity: 1, display: display, duration: 0.8, ease: 'power2.out', onStart: () => {
                 setTimeout(() => {
                     window.portalSelected = false;
-
-                    if (window.innerWidth > 820) {
-                        window.webgl.home.changeLightColor('#062d89');
-                    }
                 }, 100);
             }
         })
     }
 
     const goHome = () => {
-        if (window.inHome != true) {
+        if (window.inHome != true && window.webgl.pageChanging == false) {
             window.webgl.changeScenes('home', goHomeAnim);
         }
     }

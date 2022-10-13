@@ -4,16 +4,27 @@ import { gsap } from 'gsap';
 export function Menu() {
     window.portalSelected = false;
     const ref = useRef(null);
+    const selector = useRef(null);
+    let texts = [];
 
-    const onHover = (color) => {
+    setTimeout(() => {
+        texts = [...document.querySelectorAll('.text-container')];
+        console.log(texts);
+    }, 500);
+
+    const onHover = (color, event) => {
         if (window.portalSelected == false) {
             window.webgl.home.changeLightColor(color);
-        }
-    };
 
-    const onLeave = () => {
-        if (window.portalSelected == false) {
-            window.webgl.home.changeLightColor('#062d89');
+            texts.forEach(tc => {
+                tc.children[0].classList.remove("active");
+            });
+
+            event.target.classList.add("active");
+
+            const y = texts.indexOf(event.target.parentElement) * 4.6;
+
+            gsap.to(selector.current, { y: y + 'rem', opacity: 1, duration: 0.3, ease: 'power2.out' });
         }
     };
 
@@ -29,10 +40,14 @@ export function Menu() {
 
     return <>
         <div className="home-menu" ref={ref}>
-            <div className="text-container"><span onMouseEnter={() => onHover('#890000')} onMouseLeave={onLeave} onClick={() => { goTo('other') }}>WHO I AM</span></div>
-            <div className="text-container"><span onMouseEnter={() => onHover('#00890d')} onMouseLeave={onLeave} onClick={() => { goTo('other') }}>TECHNOLOGIES</span></div>
-            <div className="text-container"><span onMouseEnter={() => onHover('#891800')} onMouseLeave={onLeave} onClick={() => { goTo('other') }}>WORKS</span></div>
-            <div className="text-container"><span onMouseEnter={() => onHover('#9600e2')} onMouseLeave={onLeave} onClick={() => { goTo('other') }}>PROJECTS</span></div>
+            <div className="menu-content">
+                <div className="selector" ref={selector}><div className="selector-line"></div></div>
+
+                <div className="text-container"><span onMouseEnter={(e) => onHover('#890000', e)} onClick={() => { goTo('other') }}>WHO I AM</span></div>
+                <div className="text-container"><span onMouseEnter={(e) => onHover('#00890d', e)} onClick={() => { goTo('other') }}>TECHNOLOGIES</span></div>
+                <div className="text-container"><span onMouseEnter={(e) => onHover('#891800', e)} onClick={() => { goTo('other') }}>WORKS</span></div>
+                <div className="text-container"><span onMouseEnter={(e) => onHover('#9600e2', e)} onClick={() => { goTo('other') }}>PROJECTS</span></div>
+            </div>
         </div>
     </>;
 }

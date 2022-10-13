@@ -1,7 +1,7 @@
 .home-menu {
     height: 100%;
     width: 100%;
-    padding: 0 3rem;
+    padding: 0 5rem;
     display: none;
     flex-direction: column;
     justify-content: center;
@@ -10,26 +10,55 @@
         display: flex;
     }
 
-    .text-container {
-        display: block;
+    .menu-content {
+        flex-direction: column;
+        justify-content: center;
+        gap: 1rem;
         position: relative;
+        display: flex;
         width: 100%;
-        height: 3.6rem;
+        height: fit-content;
 
-        span {
-            transition: 0.3s all;
-            width: fit-content;
-            color: #fff;
-            opacity: 0.3;
-            font-size: 3.2rem;
+        .selector {
+            height: 3.6rem;
+            width: 0.5rem;
             position: absolute;
             top: 0;
-            left: 0;
-            cursor: pointer;
+            left: -2rem;
+            opacity: 0;
+            display: flex;
+            flex-direction: row;
+            align-items: center;
+            justify-content: center;
 
-            &:hover {
-                opacity: 1;
-                font-size: 3.6rem;
+            .selector-line {
+                background-color: #fff;
+                width: 100%;
+                height: 2.8rem;
+            }
+        }
+
+        .text-container {
+            display: block;
+            position: relative;
+            width: 100%;
+            height: 3.6rem;
+
+            span {
+                transition: 0.3s all;
+                width: fit-content;
+                color: #fff;
+                opacity: 0.3;
+                font-size: 3.2rem;
+                position: absolute;
+                top: 0;
+                left: 0;
+                cursor: pointer;
+
+                &.active {
+                    opacity: 1;
+                    font-size: 3.6rem;
+                }
             }
         }
     }
