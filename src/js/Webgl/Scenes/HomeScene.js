@@ -76,6 +76,21 @@ export class HomeScene {
                 this.portalParticles.push(particle);
                 this.scene.add(particle);
             }
+
+            for (let i = 0; i < 40; i++) {
+                const particle = new THREE.Mesh(portalGeo, portalMaterial);
+                particle.position.set(
+                    Math.random() * 250 - 125,
+                    Math.random() * 200 - 100,
+                    25
+                );
+                particle.position.y += 100;
+                particle.rotation.z = Math.random() * 360;
+                particle.scale.set(1000, 1000);
+                particle.material.opacity = 0.4;
+                this.smokeParticles.push(particle);
+                this.scene.add(particle);
+            }
         });
     }
 
