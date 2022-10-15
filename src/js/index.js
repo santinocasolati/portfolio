@@ -98,7 +98,6 @@ export default class Site {
 
   setResize() {
     window.addEventListener("resize", () => {
-      console.log('resize');
       this.resize();
     });
   }

@@ -9,7 +9,6 @@ export function Menu() {
 
     setTimeout(() => {
         texts = [...document.querySelectorAll('.text-container')];
-        console.log(texts);
     }, 500);
 
     const onHover = (color, event) => {

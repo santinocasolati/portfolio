@@ -15,7 +15,7 @@ export default class Webgl {
         this.width = window.innerWidth;
         this.height = window.innerHeight;
 
-        this.renderer = new THREE.WebGLRenderer({ antialias: false });
+        this.renderer = new THREE.WebGLRenderer({ antialias: true });
         this.renderer.setClearColor(0x000000, 1);
         this.container.appendChild(this.renderer.domElement);
         this.renderer.setPixelRatio(window.devicePixelRatio);
@@ -149,7 +149,7 @@ export default class Webgl {
 
     render() {
         const delta = this.clock.getDelta();
-    
+
         if (this.prevScene === this.home || this.nextScene === this.home) {
             this.home.update(delta);
         }
