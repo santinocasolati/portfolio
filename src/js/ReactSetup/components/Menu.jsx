@@ -43,7 +43,7 @@ export function Menu() {
                 <div className="selector" ref={selector}><div className="selector-line"></div></div>
 
                 <div className="text-container"><span onMouseEnter={(e) => onHover('#890000', e)} onClick={() => { goTo('other') }}>WHO I AM</span></div>
-                <div className="text-container"><span onMouseEnter={(e) => onHover('#00890d', e)} onClick={() => { goTo('other') }}>TECHNOLOGIES</span></div>
+                <div className="text-container"><span onMouseEnter={(e) => onHover('#00890d', e)} onClick={() => { goTo('techs') }}>TECHNOLOGIES</span></div>
                 <div className="text-container"><span onMouseEnter={(e) => onHover('#891800', e)} onClick={() => { goTo('other') }}>WORKS</span></div>
                 <div className="text-container"><span onMouseEnter={(e) => onHover('#9600e2', e)} onClick={() => { goTo('other') }}>PROJECTS</span></div>
             </div>

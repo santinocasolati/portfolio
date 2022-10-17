@@ -8,6 +8,7 @@ import { HomeScene } from './Scenes/HomeScene';
 
 import teleportationVertex from './Shaders/Teleportation/vertex.glsl';
 import teleportationFragment from './Shaders/Teleportation/fragment.glsl';
+import { TechsScene } from './Scenes/TechsScene';
 
 export default class Webgl {
     constructor(options) {
@@ -22,10 +23,12 @@ export default class Webgl {
 
         this.clock = new THREE.Clock();
         this.textureLoader = new THREE.TextureLoader();
+        this.modelLoader = new GLTFLoader();
 
         this.gui = new dat.GUI();
         this.gui.hide();
-        this.debug = false;
+        this.gui.domElement.parentElement.style.zIndex = 10000;
+        this.debug = true;
 
         this.pageChanging = false;
 
@@ -72,7 +75,6 @@ export default class Webgl {
 
     setScenes() {
         this.texturePrev = new THREE.WebGLRenderTarget(this.width, this.height);
-
         this.textureNext = new THREE.WebGLRenderTarget(this.width, this.height);
 
         this.finalScene = new THREE.Scene();
@@ -91,10 +93,10 @@ export default class Webgl {
         this.finalScene.add(renderMesh);
 
         this.home = new HomeScene(this.textureLoader, this.gui);
-        this.home2 = new HomeScene(this.textureLoader, this.gui);
+        this.techs = new TechsScene(this.modelLoader, this.gui);
 
         this.prevScene = this.home;
-        this.nextScene = this.home;
+        this.nextScene = null;
     }
 
     changeScenes(scene, enterAnim = false) {
@@ -106,8 +108,8 @@ export default class Webgl {
                 window.inHome = true;
                 break;
 
-            case 'other':
-                sceneToGo = this.home2;
+            case 'techs':
+                sceneToGo = this.techs;
                 window.inHome = false;
                 break;
 
@@ -123,6 +125,7 @@ export default class Webgl {
             },
             onComplete: () => {
                 this.prevScene = sceneToGo;
+                this.nextScene = null;
                 this.renderMat.uniforms.progress.value = 0;
 
                 this.pageChanging = false;

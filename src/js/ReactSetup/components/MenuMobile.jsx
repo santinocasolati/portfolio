@@ -85,7 +85,7 @@ export function MenuMobile() {
                 <div className="menu-mobile-slide">
                     <span>TECHNOLOGIES</span>
 
-                    <div className="enter-btn main-btn" onClick={() => { goTo('other') }}>
+                    <div className="enter-btn main-btn" onClick={() => { goTo('techs') }}>
                         ENTER
                     </div>
                 </div>
