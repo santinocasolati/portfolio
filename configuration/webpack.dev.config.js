@@ -12,6 +12,7 @@ module.exports = merge(webpackConfiguration, {
 
   /* Development Server Configuration */
   devServer: {
+    historyApiFallback: true,
     static: {
       directory: environment.paths.output,
       publicPath: '/',

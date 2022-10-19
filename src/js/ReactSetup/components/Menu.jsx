@@ -1,4 +1,5 @@
 import React, { useRef } from 'react';
+import { NavLink } from 'react-router-dom';
 import { gsap } from 'gsap';
 
 export function Menu() {
@@ -37,15 +38,36 @@ export function Menu() {
         });
     }
 
+    window.addEventListener("resize", () => {
+        if (window.innerWidth >= 820) {
+            ref.current.style.display = 'flex';
+            ref.current.style.opacity = 1;
+        } else {
+            ref.current.style.display = 'none';
+            ref.current.style.opacity = 0;
+        }
+    });
+
     return <>
         <div className="home-menu" ref={ref}>
             <div className="menu-content">
                 <div className="selector" ref={selector}><div className="selector-line"></div></div>
 
-                <div className="text-container"><span onMouseEnter={(e) => onHover('#890000', e)} onClick={() => { goTo('other') }}>WHO I AM</span></div>
-                <div className="text-container"><span onMouseEnter={(e) => onHover('#00890d', e)} onClick={() => { goTo('techs') }}>TECHNOLOGIES</span></div>
-                <div className="text-container"><span onMouseEnter={(e) => onHover('#891800', e)} onClick={() => { goTo('other') }}>WORKS</span></div>
-                <div className="text-container"><span onMouseEnter={(e) => onHover('#9600e2', e)} onClick={() => { goTo('other') }}>PROJECTS</span></div>
+                <NavLink className="menu-link">
+                    <div className="text-container"><span onMouseEnter={(e) => onHover('#890000', e)} onClick={() => { goTo('other') }}>WHO I AM</span></div>
+                </NavLink>
+
+                <NavLink className="menu-link" to="/technologies">
+                    <div className="text-container"><span onMouseEnter={(e) => onHover('#00890d', e)} onClick={() => { goTo('techs') }}>TECHNOLOGIES</span></div>
+                </NavLink>
+
+                <NavLink className="menu-link">
+                    <div className="text-container"><span onMouseEnter={(e) => onHover('#891800', e)} onClick={() => { goTo('other') }}>WORKS</span></div>
+                </NavLink>
+
+                <NavLink className="menu-link">
+                    <div className="text-container"><span onMouseEnter={(e) => onHover('#9600e2', e)} onClick={() => { goTo('other') }}>PROJECTS</span></div>
+                </NavLink>
             </div>
         </div>
     </>;

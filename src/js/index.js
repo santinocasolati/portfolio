@@ -16,10 +16,16 @@ gsap.registerPlugin(CustomEase);
 gsap.registerPlugin(ScrollTrigger);
 gsap.registerPlugin(SplitText);
 
+history.pushState(null, 'Santino Casolati - Web Developer', '/');
+
 export default class Site {
   constructor(options) {
     window.addEventListener("load", () => {
-      const tl = gsap.timeline();
+      const tl = gsap.timeline({
+        onStart: () => {
+          document.querySelector('.introduction').style.pointerEvents = 'all';
+        }
+      });
       tl.to('.loader', { opacity: 0, display: 'none', duration: 0.8 }, 0);
       tl.fromTo('#webgl-container', { opacity: 0 }, { opacity: 1, duration: 0.8 }, 1.4);
       tl.fromTo('.intro-title', { opacity: 0 }, { opacity: 1, duration: 0.6 }, 1.7);

@@ -1,4 +1,5 @@
 import React, { useRef } from 'react';
+import { NavLink } from 'react-router-dom';
 import { gsap } from 'gsap';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faArrowLeft, faArrowRight } from "@fortawesome/free-solid-svg-icons";
@@ -58,6 +59,7 @@ export function MenuMobile() {
 
     const goTo = (site) => {
         window.portalSelected = true;
+        window.prevMenuMobile = position;
 
         gsap.to(menu.current, {
             opacity: 0, display: 'none', duration: 0.8, ease: 'power2.out', onComplete: () => {
@@ -65,6 +67,16 @@ export function MenuMobile() {
             }
         });
     }
+
+    window.addEventListener("resize", () => {
+        if (window.innerWidth < 820) {
+            menu.current.style.display = 'block';
+            menu.current.style.opacity = 1;
+        } else {
+            menu.current.style.display = 'none';
+            menu.current.style.opacity = 0;
+        }
+    })
 
     return <>
         <div className="home-menu-mobile" ref={menu}>
@@ -77,33 +89,41 @@ export function MenuMobile() {
                 <div className="menu-mobile-slide">
                     <span>WHO I AM</span>
 
-                    <div className="enter-btn main-btn" onClick={() => { goTo('other') }}>
-                        ENTER
-                    </div>
+                    <NavLink className="menu-mobile-link">
+                        <div className="enter-btn main-btn" onClick={() => { goTo('other') }}>
+                            ENTER
+                        </div>
+                    </NavLink>
                 </div>
 
                 <div className="menu-mobile-slide">
                     <span>TECHNOLOGIES</span>
 
-                    <div className="enter-btn main-btn" onClick={() => { goTo('techs') }}>
-                        ENTER
-                    </div>
+                    <NavLink className="menu-mobile-link" to="/technologies">
+                        <div className="enter-btn main-btn" onClick={() => { goTo('techs') }}>
+                            ENTER
+                        </div>
+                    </NavLink>
                 </div>
 
                 <div className="menu-mobile-slide">
                     <span>WORKS</span>
 
-                    <div className="enter-btn main-btn" onClick={() => { goTo('other') }}>
-                        ENTER
-                    </div>
+                    <NavLink className="menu-mobile-link">
+                        <div className="enter-btn main-btn" onClick={() => { goTo('other') }}>
+                            ENTER
+                        </div>
+                    </NavLink>
                 </div>
 
                 <div className="menu-mobile-slide">
                     <span>PROJECTS</span>
 
-                    <div className="enter-btn main-btn" onClick={() => { goTo('other') }}>
-                        ENTER
-                    </div>
+                    <NavLink className="menu-mobile-link">
+                        <div className="enter-btn main-btn" onClick={() => { goTo('other') }}>
+                            ENTER
+                        </div>
+                    </NavLink>
                 </div>
             </div>
         </div>

@@ -6,8 +6,10 @@ export function Intro() {
         const tl = gsap.timeline();
 
         tl.to('.introduction', { opacity: 0, duration: 0.8, onComplete: () => gsap.set('.introduction', { display: 'none' }) }, 0);
-        tl.to('.home', {
-            opacity: 1, pointerEvents: 'all', duration: 0.8, onStart: () => {
+        tl.to(window.innerWidth > 820 ? '.home-menu' : '.home-menu-mobile', {
+            opacity: 1, duration: 0.8, onStart: () => {
+                document.querySelector('.home').style.pointerEvents = 'all';
+
                 if (window.innerWidth < 820) {
                     setTimeout(() => {
                         window.webgl.home.changeLightColor('#890000');

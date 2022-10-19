@@ -3,6 +3,7 @@
     height: 100%;
     display: block;
     position: relative;
+    opacity: 0;
 
     @include respond-to("SML") {
         display: none;
@@ -24,6 +25,7 @@
 
         svg {
             pointer-events: all;
+            cursor: pointer;
 
             &:first-of-type {
                 opacity: 0.2;
@@ -51,6 +53,14 @@
                 color: #fff;
                 opacity: 0.8;
                 text-align: center;
+            }
+
+            .menu-mobile-link {
+                pointer-events: none;
+
+                .enter-btn {
+                    pointer-events: all;
+                }
             }
         }
     }
