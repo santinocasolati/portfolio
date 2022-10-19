@@ -11,6 +11,7 @@ export class TechsScene {
         this.gui = gui;
 
         this.scene = new THREE.Scene();
+        this.scene.background = new THREE.Color("#000");
 
         this.width = window.innerWidth;
         this.height = window.outerHeight;
@@ -222,15 +223,13 @@ export class TechsScene {
         const floorGeo = new THREE.PlaneGeometry(1, 1, 1, 1);
 
         const floorMat = new THREE.MeshStandardMaterial({
-            metalness: 1,
-            roughness: 0.186,
-            color: '#CCC'
+            color: '#0F0F0F'
         });
 
         const floor = new THREE.Mesh(floorGeo, floorMat);
         this.scene.add(floor);
 
-        floor.scale.set(50, 50);
+        floor.scale.set(1000, 1000);
         floor.rotation.x = -90 * (Math.PI / 180);
         floor.position.set(0, 0, 0);
     }

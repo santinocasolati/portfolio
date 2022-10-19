@@ -7,6 +7,7 @@ export class HomeScene {
         this.gui = gui;
 
         this.scene = new THREE.Scene();
+        this.scene.background = new THREE.Color("#0f0f0f");
 
         this.width = window.innerWidth;
         this.height = window.outerHeight;
