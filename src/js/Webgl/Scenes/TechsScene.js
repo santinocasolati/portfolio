@@ -27,10 +27,9 @@ export class TechsScene {
 
         this.addLights();
 
-        this.addFloor();
         this.addModel();
 
-        // this.setAnimation();
+        this.setAnimation();
 
         this.setupResize();
         this.resize();
@@ -219,21 +218,6 @@ export class TechsScene {
         this.scene.add(ambientLight)
     }
 
-    addFloor() {
-        const floorGeo = new THREE.PlaneGeometry(1, 1, 1, 1);
-
-        const floorMat = new THREE.MeshStandardMaterial({
-            color: '#0F0F0F'
-        });
-
-        const floor = new THREE.Mesh(floorGeo, floorMat);
-        this.scene.add(floor);
-
-        floor.scale.set(1000, 1000);
-        floor.rotation.x = -90 * (Math.PI / 180);
-        floor.position.set(0, 0, 0);
-    }
-
     addModel() {
         this.modelLoader.load("static/models/computers.glb", (model) => {
             this.scene.add(model.scene);
@@ -242,45 +226,148 @@ export class TechsScene {
 
     setAnimation() {
         const duration = 0.8;
+        this.scrollPos = 0;
+        this.scrollAnimating = false;
 
-        const tl = gsap.timeline({
-            scrollTrigger: {
-                start: 'top top',
-                end: '+=1000vh',
-                trigger: '.page',
-                markers: true
+        this.scrollAnimations = [
+            () => {
+                const tl = gsap.timeline({
+                    onComplete: () => {
+                        this.scrollAnimating = false
+                    }
+                });
+                tl.to(this.camera.rotation, { x: 0, y: 0.131, z: 0, duration: duration }, 0);
+                tl.to(this.camera.position, { x: 1.111, y: 2.5, z: 5, duration: duration }, 0);
+            },
+            () => {
+                const tl = gsap.timeline({
+                    onComplete: () => {
+                        this.scrollAnimating = false
+                    }
+                });
+                tl.to(this.camera.rotation, { x: 0, y: 1.3, z: 0, duration: duration }, 0);
+                tl.to(this.camera.position, { x: -1.3, y: 3.5, z: 2.125, duration: duration }, 0);
+            },
+            () => {
+                const tl = gsap.timeline({
+                    onComplete: () => {
+                        this.scrollAnimating = false
+                    }
+                });
+                tl.to(this.camera.rotation, { x: 0, y: 1.08, z: 0, duration: duration }, 0);
+                tl.to(this.camera.position, { x: -1, y: 0.9, z: 0.3, duration: duration }, 0);
+            },
+            () => {
+                const tl = gsap.timeline({
+                    onComplete: () => {
+                        this.scrollAnimating = false
+                    }
+                });
+                tl.to(this.camera.rotation, { x: 0, y: 0.56, z: 0, duration: duration }, 0);
+                tl.to(this.camera.position, { x: -2.775, y: 4.768, z: -1.175, duration: duration }, 0);
+            },
+            () => {
+                const tl = gsap.timeline({
+                    onComplete: () => {
+                        this.scrollAnimating = false
+                    }
+                });
+                tl.to(this.camera.rotation, { x: 0, y: 1.091, z: 0, duration: duration }, 0);
+                tl.to(this.camera.position, { x: -0.261, y: 3.168, z: -0.718, duration: duration }, 0);
+            },
+            () => {
+                const tl = gsap.timeline({
+                    onComplete: () => {
+                        this.scrollAnimating = false
+                    }
+                });
+                tl.to(this.camera.rotation, { x: 0, y: 0, z: 0, duration: duration }, 0);
+                tl.to(this.camera.position, { x: 0.196, y: 2.025, z: -0.261, duration: duration }, 0);
+            },
+            () => {
+                const tl = gsap.timeline({
+                    onComplete: () => {
+                        this.scrollAnimating = false
+                    }
+                });
+                tl.to(this.camera.rotation, { x: 0, y: 0, z: 0, duration: duration }, 0);
+                tl.to(this.camera.position, { x: 0.882, y: 4.768, z: -2.089, duration: duration }, 0);
+            },
+            () => {
+                const tl = gsap.timeline({
+                    onComplete: () => {
+                        this.scrollAnimating = false
+                    }
+                });
+                tl.to(this.camera.rotation, { x: 0, y: -0.326, z: 0, duration: duration }, 0);
+                tl.to(this.camera.position, { x: 0.654, y: 0.658, z: 0.196, duration: duration }, 0);
+            },
+            () => {
+                const tl = gsap.timeline({
+                    onComplete: () => {
+                        this.scrollAnimating = false
+                    }
+                });
+                tl.to(this.camera.rotation, { x: 0, y: -0.692, z: 0, duration: duration }, 0);
+                tl.to(this.camera.position, { x: 1.339, y: 2.482, z: 0.882, duration: duration }, 0);
+            },
+            () => {
+                const tl = gsap.timeline({
+                    onComplete: () => {
+                        this.scrollAnimating = false
+                    }
+                });
+                tl.to(this.camera.rotation, { x: 0, y: -1.058, z: 0, duration: duration }, 0);
+                tl.to(this.camera.position, { x: 2.254, y: 4.539, z: -0.718, duration: duration }, 0);
+            },
+            () => {
+                const tl = gsap.timeline({
+                    onComplete: () => {
+                        this.scrollAnimating = false
+                    }
+                });
+                tl.to(this.camera.rotation, { x: 0, y: 0.131, z: 0, duration: duration }, 0);
+                tl.to(this.camera.position, { x: 1.111, y: 2.5, z: 5, duration: duration }, 0);
+            },
+        ];
+    }
+
+    scrollDownAnim() {
+        if (this.scrollPos < this.scrollAnimations.length - 1 && this.scrollAnimating === false) {
+            this.scrollAnimating = true;
+            this.scrollPos += 1;
+
+            if (this.scrollPos != this.scrollAnimations.length - 1 && this.scrollPos !== 1) {
+                const tl = gsap.timeline({
+                    onComplete: () => {
+                        this.scrollAnimations[this.scrollPos]();
+                    }
+                });
+                tl.to(this.camera.rotation, { x: 0, y: 0.131, z: 0, duration: 0.8 }, 0);
+                tl.to(this.camera.position, { x: 1.111, y: 2.5, z: 5, duration: 0.8 }, 0);
+            } else {
+                this.scrollAnimations[this.scrollPos]();
             }
-        });
-        // Start
-        tl.to(this.camera.rotation, { x: 0, y: 0.131, z: 0, duration: duration }, 0);
-        tl.to(this.camera.position, { x: 1.111, y: 2.5, z: 5, duration: duration }, 0);
-        // Screen 1
-        tl.to(this.camera.rotation, { x: 0, y: 1.3, z: 0, duration: duration }, '>');
-        tl.to(this.camera.position, { x: -1.3, y: 3.5, z: 2.125, duration: duration }, '<');
-        // Screen 2
-        tl.to(this.camera.rotation, { x: 0, y: 1.08, z: 0, duration: duration }, '>');
-        tl.to(this.camera.position, { x: -1, y: 0.9, z: 0.3, duration: duration }, '<');
-        // Screen 3
-        tl.to(this.camera.rotation, { x: 0, y: 0.56, z: 0, duration: duration }, '>');
-        tl.to(this.camera.position, { x: -2.775, y: 4.768, z: -1.175, duration: duration }, '<');
-        // Screen 4
-        tl.to(this.camera.rotation, { x: 0, y: 1.091, z: 0, duration: duration }, '>');
-        tl.to(this.camera.position, { x: -0.261, y: 3.168, z: -0.718, duration: duration }, '<');
-        // Screen 5
-        tl.to(this.camera.rotation, { x: 0, y: 0, z: 0, duration: duration }, '>');
-        tl.to(this.camera.position, { x: 0.196, y: 2.025, z: -0.261, duration: duration }, '<');
-        // Screen 6
-        tl.to(this.camera.rotation, { x: 0, y: 0, z: 0, duration: duration }, '>');
-        tl.to(this.camera.position, { x: 0.882, y: 4.768, z: -2.089, duration: duration }, '<');
-        // Screen 7
-        tl.to(this.camera.rotation, { x: 0, y: -0.326, z: 0, duration: duration }, '>');
-        tl.to(this.camera.position, { x: 0.654, y: 0.658, z: 0.196, duration: duration }, '<');
-        // Screen 8
-        tl.to(this.camera.rotation, { x: 0, y: -0.692, z: 0, duration: duration }, '>');
-        tl.to(this.camera.position, { x: 1.339, y: 2.482, z: 0.882, duration: duration }, '<');
-        // Screen 9
-        tl.to(this.camera.rotation, { x: 0, y: -1.058, z: 0, duration: duration }, '>');
-        tl.to(this.camera.position, { x: 2.254, y: 4.539, z: -0.718, duration: duration }, '<');
+        }
+    }
+
+    scrollUpAnim() {
+        if (this.scrollPos > 0 && this.scrollAnimating === false) {
+            this.scrollAnimating = true;
+            this.scrollPos -= 1;
+            
+            if (this.scrollPos != this.scrollAnimations.length - 1 && this.scrollPos !== 0) {
+                const tl = gsap.timeline({
+                    onComplete: () => {
+                        this.scrollAnimations[this.scrollPos]();
+                    }
+                });
+                tl.to(this.camera.rotation, { x: 0, y: 0.131, z: 0, duration: 0.8 }, 0);
+                tl.to(this.camera.position, { x: 1.111, y: 2.5, z: 5, duration: 0.8 }, 0);
+            } else {
+                this.scrollAnimations[this.scrollPos]();
+            }
+        }
     }
 
     resize() {
