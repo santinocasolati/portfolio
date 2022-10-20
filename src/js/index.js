@@ -24,6 +24,10 @@ export default class Site {
       const tl = gsap.timeline({
         onStart: () => {
           document.querySelector('.introduction').style.pointerEvents = 'all';
+          document.querySelector('.page').style.display = 'block';
+          document.querySelector('.page').style.opacity = 1;
+          document.querySelector('.home-menu').style.opacity = 0;
+          document.querySelector('.home-menu-mobile').style.opacity = 0;
         }
       });
       tl.to('.loader', { opacity: 0, display: 'none', duration: 0.8 }, 0);

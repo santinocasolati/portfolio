@@ -6,7 +6,6 @@ import { faArrowLeft, faArrowRight } from "@fortawesome/free-solid-svg-icons";
 
 export function MenuMobile() {
     let position = 0;
-    const menu = useRef(null);
     const wrapper = useRef(null);
     const arrowL = useRef(null);
     const arrowR = useRef(null);
@@ -57,29 +56,8 @@ export function MenuMobile() {
         }
     };
 
-    const goTo = (site) => {
-        window.portalSelected = true;
-        window.prevMenuMobile = position;
-
-        gsap.to(menu.current, {
-            opacity: 0, display: 'none', duration: 0.8, ease: 'power2.out', onComplete: () => {
-                window.webgl.changeScenes(site);
-            }
-        });
-    }
-
-    window.addEventListener("resize", () => {
-        if (window.innerWidth < 820) {
-            menu.current.style.display = 'block';
-            menu.current.style.opacity = 1;
-        } else {
-            menu.current.style.display = 'none';
-            menu.current.style.opacity = 0;
-        }
-    })
-
     return <>
-        <div className="home-menu-mobile" ref={menu}>
+        <div className="home-menu-mobile">
             <div className="menu-arrows">
                 <FontAwesomeIcon icon={faArrowLeft} inverse size='xl' onClick={prevSlide} ref={arrowL} />
                 <FontAwesomeIcon icon={faArrowRight} inverse size='xl' onClick={nextSlide} ref={arrowR} />
@@ -90,7 +68,7 @@ export function MenuMobile() {
                     <span>WHO I AM</span>
 
                     <NavLink className="menu-mobile-link">
-                        <div className="enter-btn main-btn" onClick={() => { goTo('other') }}>
+                        <div className="enter-btn main-btn">
                             ENTER
                         </div>
                     </NavLink>
@@ -100,7 +78,7 @@ export function MenuMobile() {
                     <span>TECHNOLOGIES</span>
 
                     <NavLink className="menu-mobile-link" to="/technologies">
-                        <div className="enter-btn main-btn" onClick={() => { goTo('techs') }}>
+                        <div className="enter-btn main-btn">
                             ENTER
                         </div>
                     </NavLink>
@@ -110,7 +88,7 @@ export function MenuMobile() {
                     <span>WORKS</span>
 
                     <NavLink className="menu-mobile-link">
-                        <div className="enter-btn main-btn" onClick={() => { goTo('other') }}>
+                        <div className="enter-btn main-btn">
                             ENTER
                         </div>
                     </NavLink>
@@ -120,7 +98,7 @@ export function MenuMobile() {
                     <span>PROJECTS</span>
 
                     <NavLink className="menu-mobile-link">
-                        <div className="enter-btn main-btn" onClick={() => { goTo('other') }}>
+                        <div className="enter-btn main-btn">
                             ENTER
                         </div>
                     </NavLink>

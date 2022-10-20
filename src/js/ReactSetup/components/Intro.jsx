@@ -6,7 +6,7 @@ export function Intro() {
         const tl = gsap.timeline();
 
         tl.to('.introduction', { opacity: 0, duration: 0.8, onComplete: () => gsap.set('.introduction', { display: 'none' }) }, 0);
-        tl.to(window.innerWidth > 820 ? '.home-menu' : '.home-menu-mobile', {
+        tl.to('.home-menu', {
             opacity: 1, duration: 0.8, onStart: () => {
                 document.querySelector('.home').style.pointerEvents = 'all';
 
@@ -17,6 +17,7 @@ export function Intro() {
                 }
             }
         }, 0.8);
+        tl.to('.home-menu-mobile', { opacity: 1, duration: 0.8 }, 0.8);
     };
 
     return <>

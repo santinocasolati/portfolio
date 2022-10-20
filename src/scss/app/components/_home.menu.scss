@@ -5,7 +5,7 @@
     display: none;
     flex-direction: column;
     justify-content: center;
-    opacity: 0;
+    opacity: 1;
 
     @include respond-to("SML") {
         display: flex;

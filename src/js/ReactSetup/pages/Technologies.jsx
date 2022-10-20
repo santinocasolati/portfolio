@@ -11,7 +11,6 @@ export function Technologies() {
 
     return <>
         <main className="technologies" onWheel={handleWheel}>
-
         </main>
     </>;
 }

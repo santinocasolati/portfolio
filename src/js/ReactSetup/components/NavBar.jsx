@@ -7,35 +7,9 @@ import { SplitText } from "gsap/SplitText";
 gsap.registerPlugin(SplitText);
 
 export function NavBar() {
-    window.inHome = true;
     const textToSplit = useRef(null);
     const charsShown = [];
     const charsHidden = [];
-
-    const goHomeAnim = () => {
-        const target = window.innerWidth > 820 ? '.home-menu' : '.home-menu-mobile';
-        const display = window.innerWidth > 820 ? 'flex' : 'block';
-
-        if (target === '.home-menu-mobile') {
-            window.webgl.home.changeLightColor("#890000");
-        } else {
-            window.webgl.home.changeLightColor("#062d89");
-        }
-
-        gsap.to(target, {
-            opacity: 1, display: display, duration: 0.8, ease: 'power2.out', onStart: () => {
-                setTimeout(() => {
-                    window.portalSelected = false;
-                }, 100);
-            }
-        })
-    }
-
-    const goHome = () => {
-        if (window.inHome != true && window.webgl.pageChanging == false) {
-            window.webgl.changeScenes('home', goHomeAnim);
-        }
-    }
 
     const hoverEnter = () => {
         const tl = gsap.timeline();
@@ -75,13 +49,13 @@ export function NavBar() {
         <nav>
             <div className="nav-left">
                 <NavLink to="/">
-                    <div className="sc-text" onClick={goHome} onMouseEnter={hoverEnter} onMouseLeave={hoverLeave} ref={textToSplit}>SANTINO CASOLATI</div>
+                    <div className="sc-text" onMouseEnter={hoverEnter} onMouseLeave={hoverLeave} ref={textToSplit}>SANTINO CASOLATI</div>
                 </NavLink>
             </div>
 
             <div className="nav-right">
                 <NavLink to="/">
-                    <div className="menu-btn" onClick={goHome}>
+                    <div className="menu-btn">
                         <div className='bar-up'></div>
                         <div className='bar-up hidden'></div>
                         <div className='bar-down'></div>

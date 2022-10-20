@@ -3,7 +3,7 @@
     height: 100%;
     display: block;
     position: relative;
-    opacity: 0;
+    opacity: 1;
 
     @include respond-to("SML") {
         display: none;
