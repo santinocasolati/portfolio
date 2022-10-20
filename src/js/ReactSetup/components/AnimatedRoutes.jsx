@@ -21,8 +21,14 @@ export function AnimatedRoutes() {
 
         const tl = gsap.timeline();
         tl.to(exitTarget, {
-            opacity: 0, display: 'none', duration: 0.8, onComplete: () => {
+            opacity: 0, display: 'none', duration: 0.8,
+            onComplete: () => {
                 window.webgl.changeScenes(enterTarget.dataset.scene);
+            },
+            onStart: () => {
+                if (exitTarget.dataset.scene === 'techs') {
+                    window.webgl.techs.restartAnims();
+                }
             }
         }, 0);
         tl.to(enterTarget, {

@@ -355,7 +355,7 @@ export class TechsScene {
         if (this.scrollPos > 0 && this.scrollAnimating === false) {
             this.scrollAnimating = true;
             this.scrollPos -= 1;
-            
+
             if (this.scrollPos != this.scrollAnimations.length - 1 && this.scrollPos !== 0) {
                 const tl = gsap.timeline({
                     onComplete: () => {
@@ -368,6 +368,21 @@ export class TechsScene {
                 this.scrollAnimations[this.scrollPos]();
             }
         }
+    }
+
+    restartAnims() {
+        this.scrollPos = 0;
+        this.scrollAnimating = true;
+
+        const tl = gsap.timeline({
+            onComplete: () => {
+                setTimeout(() => {
+                    this.scrollAnimating = false;
+                }, 1000);
+            }
+        });
+        tl.to(this.camera.rotation, { x: 0, y: 0.131, z: 0, duration: 0.8 }, 0);
+        tl.to(this.camera.position, { x: 1.111, y: 2.5, z: 5, duration: 0.8 }, 0);
     }
 
     resize() {
