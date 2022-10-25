@@ -27,19 +27,8 @@ nav {
             font-weight: 500;
             cursor: pointer;
             white-space: nowrap;
-            opacity: 0;
             max-height: 1.375rem;
             overflow: hidden;
-
-            // &:hover {
-            //     .char-hidden {
-            //         transform: translateY(-200%);
-            //     }
-
-            //     .char-shown {
-            //         transform: translateY(-200%);
-            //     }
-            // }
 
             .char-container {
                 position: relative;
@@ -65,7 +54,6 @@ nav {
             width: 2rem;
             position: relative;
             cursor: pointer;
-            opacity: 0;
             overflow: hidden;
 
             &:hover {

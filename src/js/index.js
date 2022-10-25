@@ -20,7 +20,7 @@ history.pushState(null, 'Santino Casolati - Web Developer', '/');
 
 export default class Site {
   constructor(options) {
-    window.addEventListener("load", () => {
+    function loadAnimation() {
       const tl = gsap.timeline({
         onStart: () => {
           document.querySelector('.introduction').style.pointerEvents = 'all';
@@ -34,10 +34,22 @@ export default class Site {
       tl.fromTo('#webgl-container', { opacity: 0 }, { opacity: 1, duration: 0.8 }, 1.4);
       tl.fromTo('.intro-title', { opacity: 0 }, { opacity: 1, duration: 0.6 }, 1.7);
       tl.fromTo('.intro-subtitle', { opacity: 0 }, { opacity: 1, duration: 0.6 }, 2);
-      tl.fromTo('.intro-btn', { opacity: 0 }, { opacity: 1, duration: 0.6 }, 2.3);
+      tl.fromTo('.intro-btn', { opacity: 0 }, { opacity: 1, duration: 0.6, ease: 'power2.out' }, 2.3);
       tl.fromTo('.sc-text', { opacity: 0 }, { opacity: 1, duration: 0.6 }, 2.6);
       tl.fromTo('.menu-btn', { opacity: 0 }, { opacity: 1, duration: 0.6 }, 2.9);
-    });
+    }
+
+    function checkIntro() {
+      if (document.querySelector('.introduction')) {
+        loadAnimation();
+      } else {
+        setTimeout(() => {
+          checkIntro();
+        }, 500);
+      }
+    }
+
+    checkIntro();
 
     new BowserSetUp();
     // this.initLocomotive();

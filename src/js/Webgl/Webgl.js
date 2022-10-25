@@ -1,4 +1,5 @@
 import * as THREE from 'three';
+import Stats from 'stats.js';
 import * as dat from 'dat.gui';
 import { gsap } from 'gsap';
 
@@ -16,10 +17,12 @@ export default class Webgl {
         this.width = window.innerWidth;
         this.height = window.innerHeight;
 
-        this.renderer = new THREE.WebGLRenderer({ antialias: true });
+        this.renderer = new THREE.WebGLRenderer({
+            powerPreference: 'high-performance'
+        });
         this.renderer.setClearColor(0x000000, 1);
         this.container.appendChild(this.renderer.domElement);
-        this.renderer.setPixelRatio(window.devicePixelRatio);
+        this.renderer.setPixelRatio(window.devicePixelRatio * 0.5);
 
         this.clock = new THREE.Clock();
         this.textureLoader = new THREE.TextureLoader();
@@ -71,6 +74,10 @@ export default class Webgl {
         this.gui.add(debugObj, 'progress', 0, 1, 0.001).onChange(() => {
             this.renderMat.uniforms.progress.value = debugObj.progress;
         });
+
+        this.stats = new Stats();
+        this.stats.showPanel(0);
+        document.body.appendChild(this.stats.dom);
     }
 
     setScenes() {
@@ -151,6 +158,10 @@ export default class Webgl {
     }
 
     render() {
+        if (this.stats) {
+            this.stats.begin();
+        }
+
         const delta = this.clock.getDelta();
 
         if (this.prevScene === this.home || this.nextScene === this.home) {
@@ -169,6 +180,10 @@ export default class Webgl {
 
         this.renderer.setRenderTarget(null);
         this.renderer.render(this.finalScene, this.finalCamera);
+
+        if (this.stats) {
+            this.stats.end();
+        }
 
         requestAnimationFrame(this.render.bind(this))
     }
