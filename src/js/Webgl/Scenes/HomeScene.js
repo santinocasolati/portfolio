@@ -1,13 +1,16 @@
 import * as THREE from 'three';
 import { gsap } from 'gsap';
 
+import portalVertex from "../Shaders/Portal/vertex.glsl";
+import portalFragment from "../Shaders/Portal/fragment.glsl";
+
 export class HomeScene {
     constructor(textureLoader, gui) {
         this.textureLoader = textureLoader;
         this.gui = gui;
 
         this.scene = new THREE.Scene();
-        // this.scene.background = new THREE.Color("#0f0f0f");
+        this.scene.background = new THREE.Color("#0f0f0f");
 
         this.width = window.innerWidth;
         this.height = window.outerHeight;
@@ -18,55 +21,34 @@ export class HomeScene {
 
         this.portalParticles = [];
         this.smokeParticles = [];
-        this.tempColor = { value: "#062d89" };
 
         this.init();
     }
 
     init() {
-        this.addLights();
-
         this.particleSetup();
-
-        this.setDebug();
 
         this.setupResize();
         this.resize();
     }
 
-    setDebug() {
-        const debugObject = {
-            portalColor: "#062D89"
-        }
-
-        const portalSettings = this.gui.addFolder("Portal");
-
-        portalSettings.addColor(debugObject, 'portalColor').onChange(() => {
-            this.changeLightColor(debugObject.portalColor);
-        });
-    }
-
-    addLights() {
-        const sceneLight = new THREE.DirectionalLight(0xffffff, 0.5);
-        sceneLight.position.set(0, 0, 1);
-        this.scene.add(sceneLight);
-
-        this.portalLight = new THREE.PointLight('#062d89', 30, 350, 1.7);
-        this.portalLight.position.set(0, 100, 250);
-        this.scene.add(this.portalLight);
-    }
-
     particleSetup() {
         this.textureLoader.load("static/textures/smoke.png", (texture) => {
             const portalGeo = new THREE.PlaneGeometry(1, 1);
-            const portalMaterial = new THREE.MeshPhongMaterial({
-                map: texture,
-                transparent: true,
-                opacity: 0.4
+            this.portalMaterial = new THREE.ShaderMaterial({
+                uniforms: {
+                    uText: { value: texture },
+                    colorR: { value: 6.0 },
+                    colorG: { value: 45.0 },
+                    colorB: { value: 137.0 }
+                },
+                vertexShader: portalVertex,
+                fragmentShader: portalFragment,
+                transparent: true
             });
 
             for (let i = 880; i > 250; i--) {
-                const particle = new THREE.Mesh(portalGeo, portalMaterial);
+                const particle = new THREE.Mesh(portalGeo, this.portalMaterial);
                 particle.position.set(
                     0.3 * i * Math.cos((4 * i * Math.PI) / 180),
                     0.3 * i * Math.sin((4 * i * Math.PI) / 180),
@@ -80,7 +62,7 @@ export class HomeScene {
             }
 
             for (let i = 0; i < 40; i++) {
-                const particle = new THREE.Mesh(portalGeo, portalMaterial);
+                const particle = new THREE.Mesh(portalGeo, this.portalMaterial);
                 particle.position.set(
                     Math.random() * 250 - 125,
                     Math.random() * 200 - 100,
@@ -95,12 +77,22 @@ export class HomeScene {
         });
     }
 
+    hexToRgb(hex) {
+        let result = /^#?([a-f\d]{2})([a-f\d]{2})([a-f\d]{2})$/i.exec(hex);
+        return result ? {
+            r: parseInt(result[1], 16),
+            g: parseInt(result[2], 16),
+            b: parseInt(result[3], 16)
+        } : null;
+    }
+
     changeLightColor(color) {
-        gsap.to(this.tempColor, {
-            value: color, duration: 0.3, ease: 'power2.out', onUpdate: () => {
-                this.portalLight.color = new THREE.Color(this.tempColor.value);
-            }
-        });
+        const col = this.hexToRgb(color);
+
+        const tl = gsap.timeline();
+        tl.to(this.portalMaterial.uniforms.colorR, { value: col.r, duration: 0.8 }, 0);
+        tl.to(this.portalMaterial.uniforms.colorG, { value: col.g, duration: 0.8 }, 0);
+        tl.to(this.portalMaterial.uniforms.colorB, { value: col.b, duration: 0.8 }, 0);
     }
 
     resize() {
