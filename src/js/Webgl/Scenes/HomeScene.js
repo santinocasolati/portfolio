@@ -61,7 +61,8 @@ export class HomeScene {
             const portalGeo = new THREE.PlaneGeometry(1, 1);
             const portalMaterial = new THREE.MeshPhongMaterial({
                 map: texture,
-                transparent: true
+                transparent: true,
+                opacity: 0.4
             });
 
             for (let i = 880; i > 250; i--) {
@@ -79,7 +80,7 @@ export class HomeScene {
             }
 
             for (let i = 0; i < 40; i++) {
-                const particle = new THREE.Mesh(portalGeo, smokeMaterial);
+                const particle = new THREE.Mesh(portalGeo, portalMaterial);
                 particle.position.set(
                     Math.random() * 250 - 125,
                     Math.random() * 200 - 100,
