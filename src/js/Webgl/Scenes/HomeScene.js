@@ -24,11 +24,11 @@ export class HomeScene {
     }
 
     init() {
-        this.addLights();
+        // this.addLights();
+        // this.particleSetup();
+        // this.setDebug();
 
-        this.particleSetup();
-
-        this.setDebug();
+        this.addRecordedPortal();
 
         this.setupResize();
         this.resize();
@@ -733,6 +733,111 @@ export class HomeScene {
                 this.portalLight.color = new THREE.Color(this.tempColor.value);
             }
         });
+    }
+
+    addRecordedPortal() {
+        const videoRoute = [
+            "static/textures/blue.mp4",
+            "static/textures/red.mp4",
+            "static/textures/green.mp4",
+            "static/textures/orange.mp4",
+            "static/textures/purple.mp4",
+        ];
+
+        this.videos = [];
+        this.portals = [];
+
+        const frameGeo = new THREE.PlaneGeometry(900, 900, 1, 1);
+        const frameMat = new THREE.MeshBasicMaterial({
+            transparent: true,
+            opacity: 0
+        });
+
+        for (let i = 0; i < videoRoute.length; i++) {
+            const video = videoRoute[i];
+
+            const element = document.createElement('video');
+            element.src = video;
+            element.setAttribute("loop", "");
+            element.setAttribute("muted", "");
+            element.setAttribute("playsinline", "");
+            element.setAttribute("autoplay", "");
+
+            element.play();
+
+            element.addEventListener("playing", () => {
+                if (!element.isPlaying) {
+                    window.activeVideos += 1;
+                    element.isPlaying = true;
+                }
+            })
+
+            this.videos.push(element);
+
+            const texture = new THREE.VideoTexture(element);
+            texture.minFilter = THREE.LinearFilter;
+            texture.magFilter = THREE.LinearFilter;
+            texture.format = THREE.RGBAFormat;
+
+            const mat = frameMat.clone();
+            mat.map = texture;
+
+            const mesh = new THREE.Mesh(frameGeo, mat);
+            mesh.position.set(0, 100, 0);
+
+            if (i == 0) {
+                mat.opacity = 1;
+                this.showingPortal = mesh;
+            }
+
+            this.portals.push(mesh);
+
+            this.scene.add(mesh);
+        }
+    }
+
+    changeRecordedText(val) {
+        const tl = gsap.timeline();
+
+        switch (val) {
+            case 'blue':
+                tl.to(this.portals[1].material, { opacity: 0, duration: 0.6 }, 0);
+                tl.to(this.portals[2].material, { opacity: 0, duration: 0.6 }, 0);
+                tl.to(this.portals[3].material, { opacity: 0, duration: 0.6 }, 0);
+                tl.to(this.portals[4].material, { opacity: 0, duration: 0.6 }, 0);
+                break;
+
+            case 'red':
+                tl.to(this.portals[1].material, { opacity: 1, duration: 0.6 }, 0);
+                tl.to(this.portals[2].material, { opacity: 0, duration: 0.6 }, 0);
+                tl.to(this.portals[3].material, { opacity: 0, duration: 0.6 }, 0);
+                tl.to(this.portals[4].material, { opacity: 0, duration: 0.6 }, 0);
+                break;
+
+            case 'green':
+                tl.to(this.portals[1].material, { opacity: 1, duration: 0.6 }, 0);
+                tl.to(this.portals[2].material, { opacity: 1, duration: 0.6 }, 0);
+                tl.to(this.portals[3].material, { opacity: 0, duration: 0.6 }, 0);
+                tl.to(this.portals[4].material, { opacity: 0, duration: 0.6 }, 0);
+                break;
+
+            case 'orange':
+                tl.to(this.portals[1].material, { opacity: 1, duration: 0.6 }, 0);
+                tl.to(this.portals[2].material, { opacity: 1, duration: 0.6 }, 0);
+                tl.to(this.portals[3].material, { opacity: 1, duration: 0.6 }, 0);
+                tl.to(this.portals[4].material, { opacity: 0, duration: 0.6 }, 0);
+                break;
+
+            case 'purple':
+                tl.to(this.portals[1].material, { opacity: 1, duration: 0.6 }, 0);
+                tl.to(this.portals[2].material, { opacity: 1, duration: 0.6 }, 0);
+                tl.to(this.portals[3].material, { opacity: 1, duration: 0.6 }, 0);
+                tl.to(this.portals[4].material, { opacity: 1, duration: 0.6 }, 0);
+                break;
+
+            default:
+                break;
+        }
     }
 
     resize() {

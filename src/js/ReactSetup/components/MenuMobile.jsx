@@ -9,12 +9,12 @@ export function MenuMobile() {
     const wrapper = useRef(null);
     const arrowL = useRef(null);
     const arrowR = useRef(null);
-    const colors = ['#890000', '#00890d', '#891800', '#9600e2']
+    const colors = ['red', 'green', 'orange', 'purple']
 
     const nextSlide = () => {
         if (position < 3) {
             position += 1;
-            window.webgl.home.changeLightColor(colors[position]);
+            window.webgl.home.changeRecordedText(colors[position]);
 
             if (position == 3) {
                 gsap.to(arrowR.current, { opacity: 0.2, duration: 0.2 });
@@ -36,7 +36,7 @@ export function MenuMobile() {
     const prevSlide = () => {
         if (position > 0) {
             position -= 1;
-            window.webgl.home.changeLightColor(colors[position]);
+            window.webgl.home.changeRecordedText(colors[position]);
 
             if (position == 0) {
                 gsap.to(arrowL.current, { opacity: 0.2, duration: 0.2 });

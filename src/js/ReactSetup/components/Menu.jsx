@@ -13,7 +13,7 @@ export function Menu() {
 
     const onHover = (color, event) => {
         if (window.portalSelected == false) {
-            window.webgl.home.changeLightColor(color);
+            window.webgl.home.changeRecordedText(color);
 
             texts.forEach(tc => {
                 tc.children[0].classList.remove("active");
@@ -33,19 +33,19 @@ export function Menu() {
                 <div className="selector" ref={selector}><div className="selector-line"></div></div>
 
                 <NavLink className="menu-link">
-                    <div className="text-container"><span onMouseEnter={(e) => onHover('#890000', e)}>WHO I AM</span></div>
+                    <div className="text-container"><span onMouseEnter={(e) => onHover('red', e)}>WHO I AM</span></div>
                 </NavLink>
 
                 <NavLink className="menu-link" to="/technologies">
-                    <div className="text-container"><span onMouseEnter={(e) => onHover('#00890d', e)}>TECHNOLOGIES</span></div>
+                    <div className="text-container"><span onMouseEnter={(e) => onHover('green', e)}>TECHNOLOGIES</span></div>
                 </NavLink>
 
                 <NavLink className="menu-link">
-                    <div className="text-container"><span onMouseEnter={(e) => onHover('#891800', e)}>WORKS</span></div>
+                    <div className="text-container"><span onMouseEnter={(e) => onHover('orange', e)}>WORKS</span></div>
                 </NavLink>
 
                 <NavLink className="menu-link">
-                    <div className="text-container"><span onMouseEnter={(e) => onHover('#9600e2', e)}>PROJECTS</span></div>
+                    <div className="text-container"><span onMouseEnter={(e) => onHover('purple', e)}>PROJECTS</span></div>
                 </NavLink>
             </div>
         </div>

@@ -1,4 +1,4 @@
-import Bowser from "bowser"; // ES6 (and TypeScript with --esModuleInterop enabled)
+import Bowser from "bowser";
 
 class BowserSetUp {
   constructor() {

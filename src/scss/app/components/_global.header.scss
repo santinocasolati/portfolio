@@ -29,6 +29,7 @@ nav {
             white-space: nowrap;
             max-height: 1.375rem;
             overflow: hidden;
+            opacity: 0;
 
             .char-container {
                 position: relative;
@@ -55,6 +56,7 @@ nav {
             position: relative;
             cursor: pointer;
             overflow: hidden;
+            opacity: 0;
 
             &:hover {
                 div {

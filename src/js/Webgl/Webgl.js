@@ -164,9 +164,9 @@ export default class Webgl {
 
         const delta = this.clock.getDelta();
 
-        if (this.prevScene === this.home || this.nextScene === this.home) {
-            this.home.update(delta);
-        }
+        // if (this.prevScene === this.home || this.nextScene === this.home) {
+        //     this.home.update(delta);
+        // }
 
         this.renderer.setRenderTarget(this.texturePrev);
         this.renderer.render(this.prevScene.scene, this.prevScene.camera);

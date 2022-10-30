@@ -37,9 +37,9 @@ export function AnimatedRoutes() {
                     const target = window.innerWidth > 820 ? '.home-menu' : '.home-menu-mobile';
 
                     if (target === '.home-menu-mobile') {
-                        window.webgl.home.changeLightColor("#890000");
+                        window.webgl.home.changeRecordedText("red");
                     } else {
-                        window.webgl.home.changeLightColor("#062d89");
+                        window.webgl.home.changeRecordedText("blue");
                     }
                 }
             }
