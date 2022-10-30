@@ -763,15 +763,6 @@ export class HomeScene {
             element.setAttribute("playsinline", "");
             element.setAttribute("autoplay", "");
 
-            element.play();
-
-            element.addEventListener("playing", () => {
-                if (!element.isPlaying) {
-                    window.activeVideos += 1;
-                    element.isPlaying = true;
-                }
-            })
-
             this.videos.push(element);
 
             const texture = new THREE.VideoTexture(element);
